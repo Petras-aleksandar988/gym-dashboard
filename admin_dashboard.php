@@ -8,20 +8,7 @@ if (!isset($_SESSION['admin_id'])) {
 }
 
 
-
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-    <title>Admin Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
-
-</head>
 
 <body>
 
@@ -101,11 +88,21 @@ if (!isset($_SESSION['admin_id'])) {
                                 </td>
                                 <td> <a target="_blank" href=" <?php echo $result['access_card_pdf_path']; ?>">Access Card</a></td>
                                 <td> <?php echo $result['created_at']; ?></td>
+
+                                <td>
+
+                            <form action="edit-member.php" method="POST">
+                                <input type="hidden" name="member_id" value="<?php echo $result['member_id']; ?>">
+                                <button class="btn btn-secondary ">Edit</button>
+
+                            </form>
+
+</td>
                                 <td>
 
                                     <form action="delete-member.php" method="POST">
                                         <input type="hidden" name="member_id" value="<?php echo $result['member_id']; ?>">
-                                        <button>Delete</button>
+                                        <button  class="btn btn-danger">Delete</button>
 
                                     </form>
 
@@ -157,10 +154,31 @@ if (!isset($_SESSION['admin_id'])) {
                                 <td> <?php echo $result['email']; ?></td>
                                 <td> <?php echo $result['phone_number']; ?></td>
                                 <td> <?php echo $result['created_at']; ?></td>
+                                <td>
 
-                                <tr>
+                                    <form action="edit-trainer.php" method="POST">
+                                        <input type="hidden" name="trainer_id" value="<?php echo $result['trainer_id']; ?>">
+                                        <button class="btn btn-secondary ">Edit</button>
 
-                            <?php endforeach ?>
+                                    </form>
+
+                                </td>
+
+                                <td>
+
+                                    <form action="delete-trainer.php" method="POST">
+                                        <input type="hidden" name="trainer_id" value="<?php echo $result['trainer_id']; ?>">
+                                        <button class="btn btn-danger">Delete</button>
+
+                                    </form>
+
+                                </td>
+                            </tr>
+
+
+
+                            
+                                <?php endforeach ?>
 
 
 
@@ -264,30 +282,7 @@ if (!isset($_SESSION['admin_id'])) {
 
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js" integrity="sha512-WW8/jxkELe2CAiE4LvQfwm1rajOS8PHasCCx+knHG0gBHt8EXxS6T6tJRTGuDQVnluuAvMxWF4j8SNFDKceLFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
-    <script>
-        Dropzone.options.dropzoneUpload = {
-            url: "upload_photo.php",
-            paramName: "photo",
-            maxFilesize: 20,
-            acceptedFiles: "image/*",
-            init: function() {
-                this.on("success", function(file, response) {
-                    const jsonResponse = JSON.parse(response)
-                    if (jsonResponse.success) {
-                        document.getElementById('photoPathInput').value = jsonResponse.photo_path;
-
-                    } else {
-                        console.error(jsonResponse.error)
-                    }
-
-
-
-                })
-            }
-        }
-    </script>
+  
 
 </body>
 
