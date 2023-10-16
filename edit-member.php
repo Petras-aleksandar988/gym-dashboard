@@ -51,13 +51,13 @@ $assign_trianer = $conn->prepare( $updateSql);
 $assign_trianer->bind_param("ssssiss", $newFirstName, $newLastName,  $newEmail, $newPhoneNumber,   $newTraninigPlan,$photo , $member_id);
 $assign_trianer->execute();
 $_SESSION["success_message"] = "Info about member <b>" .  $newFirstName . " " . $newLastName .  "</b> is changed";
-header("location: admin_dashboard.php");
+header("location: admin-dashboard-members.php");
 exit();
        
     }
 ?>
 
-<div class="container">
+<div class="container " style="margin-top: 100px;">
     <div class="row">
         <div class="col-md-12">
             <h2>Edit member</h2>
@@ -142,8 +142,8 @@ exit();
                  <label for=>Upload Photo</label>
                     <div id='dropzone-upload' class='dropzone'></div>
                 <button type="submit" name="update_member" class="btn btn-primary mt-1">Save Changes</button>
+            </form>
                 <?php if ( $result['photo_path']): ?>
-                </form>
             <form action="picture-delete-member.php" method="POST">
             <input type="hidden" name="member_id" value="<?php echo $member_id; ?>">
             <div class="alert alert-danger alert-dismissible fade show d-inline-flex p-2  mt-1" role="alert">

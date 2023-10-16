@@ -3,7 +3,7 @@
 require_once "config.php";
 
 
-if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['training_plan_id'])) {
+if (isset($_POST['update_training_plan'])) {
 $training_plan_id = $_POST['training_plan_id'];
 
 $sql = "SELECT * FROM training_plans WHERE plan_id = ?";
@@ -21,14 +21,15 @@ if (!$stmt) {
 }
 
 
-if (isset($_POST['update_training_plan'])) {
+if (isset($_POST['update_plan'])) {
+    echo "click";
     // Process the form data and update the database
     $newPlanName = $_POST['plan_name'];
+    echo $newPlanName;
     $newsessionsNumber = $_POST['sessions'];
     $newPrice = $_POST['price'];
     $training_plan_id = $_POST['training_plan_id'];
-    var_dump( $newPlanName, $newsessionsNumber, $newPrice,$training_plan_id);
-
+   echo $training_plan_id;
     $updateSql = "UPDATE training_plans SET 
                   name = ?,
                   sessions = ?,
@@ -40,10 +41,25 @@ $update_training_plan = $conn->prepare( $updateSql);
 $update_training_plan->bind_param("siii", $newPlanName,  $newsessionsNumber,  $newPrice, $training_plan_id);
 $update_training_plan->execute();
 $_SESSION["success_message"] = "Training plan is updated";
-header("location: admin_dashboard.php");
+header("location: admin-dashboard-training_plan.php");
 exit();
 }
+if (isset($_POST['delete_plan'])) {
+    $training_plan_id = $_POST['training_plan_id'];
+    $sql  ="DELETE FROM training_plans WHERE plan_id = ?";
+    $run = $conn->prepare($sql);
+    $run->bind_param('i', $training_plan_id);
+    if($run->execute()){
+    
+       $message = "Training plan is deleted";
+    }else{
+        $message = "Training plan is not deleted";
+    }
+     $_SESSION['success_message'] = $message;
+     header('location:admin-dashboard-training_plan.php');
+     exit();
 
+}
 ?>
 
 <div class="container" style="margin-top: 100px;">
@@ -72,14 +88,18 @@ exit();
                                     <input type="number" name="price" value="<?php echo $result['price']; ?>">
                                 </td>
                                 <td>
-                                    <input type="hidden" name="training_plan_id" value="<?php echo $result['price']; ?>">
+                                    <input type="hidden" name="training_plan_id" value="<?php echo $training_plan_id; ?>">
                                 </td>
                                
                                 
                     </tbody>
                 </table>
                 
-                <button type="submit" name="update_training_plan" class="btn btn-primary mt-1">Update Training Plan</button>
+                <button type="submit" name="update_plan" class="btn btn-primary mt-1">Update Training Plan</button>
+            </form>
+            <form method="POST" >
+            <input type="hidden" name="training_plan_id" value="<?php echo $training_plan_id; ?>">
+            <button type="submit" name="delete_plan" class="btn btn-danger mt-1 ">Delete Training Plan</button>
             </form>
         </div>
     </div>

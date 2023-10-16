@@ -46,9 +46,9 @@
                             if ($result['trainer_first_name']) {
                                 echo $result['trainer_first_name'] . " " . $result['trainer_last_name'];
                             } else {
-                                echo "No trainer";
-                            }
-                            ?>
+                                ?>
+                               <img width="60" src="member_photos/no_trainer.jpg" alt="">
+                          <?php   } ?>
                             </td>
 
                             <td> <?php if($result['photo_path']) {?>
@@ -63,12 +63,13 @@
                         </td>
                         <td> 
                             <?php
-                            if ($result['training_plan_name']) {
-                                echo $result['training_plan_name'];
+                            if ($result['training_plan_name'] == "no plan") {
+                                ?>
+                                 <img width="60" src="member_photos/no_plan.png" alt="">
+                                 <?php
                             } else {
-                                echo "Nema plana";
-                            }
-                            ?>
+                              echo $result['training_plan_name'];
+                             } ?>
 
                     </td>
                     <td> <a target="_blank" href=" <?php echo $result['access_card_pdf_path']; ?>">Access Card</a></td>

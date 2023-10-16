@@ -4,7 +4,6 @@ require_once "config.php";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
   
-    echo $_POST['trainer_id'];
     $trainer_id =  $_POST['trainer_id'];
     $sql  ="DELETE FROM trainers WHERE trainer_id = ?";
   $run = $conn->prepare($sql);

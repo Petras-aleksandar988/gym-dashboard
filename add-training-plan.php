@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['add_training_plan'])) 
         $run -> bind_param("sss", $newPlan,$newSessions ,$price);
         $run-> execute();
         $_SESSION["success_message"] = "Training plan is ADDED";
-        header("location: admin_dashboard.php");
+        header("location: admin-dashboard-training_plan.php");
        exit();
     }
 

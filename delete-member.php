@@ -9,11 +9,11 @@ $run = $conn->prepare($sql);
 $run->bind_param('i', $member_id);
 if($run->execute()){
 
-   $message = "Clan je obrisan";
+   $message = "Member is deleted";
 }else{
-    $message = "Can nije obrisan";
+    $message = "Member is not deleted";
 }
  $_SESSION['success_message'] = $message;
- header('location:admin-dashboard-trainers.php');
+ header('location:admin-dashboard-members.php');
  exit();
 }

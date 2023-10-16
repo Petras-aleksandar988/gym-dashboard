@@ -1,5 +1,5 @@
 <div class="row mb-5 border border-secondary p-3">
-            <h2>Update/Add training plan</h2>
+            <h2>Update existing training plan</h2>
             <div class="col-md-12">
            choose tranining plan you want to update :
             <form action="training-plan-update.php" method="POST">
@@ -23,7 +23,7 @@
                       
 
                     </select>
-                    <button class="btn btn-primary mt-2">Training plan update</button>
+                    <button class="btn btn-primary mt-2" name="update_training_plan">Training plan update</button>
                     </form>
                 </div>
                 </div>
@@ -38,7 +38,7 @@
 
                     
 
-                    <input type="submit" class='btn btn-primary mt-3' name="add-session" value='ADD New Training plan'>
+                    <input type="submit" class='btn btn-primary mt-3'  value='ADD New Training plan'>
                 </form>
         </div>
     </div>
