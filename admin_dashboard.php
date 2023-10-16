@@ -24,11 +24,11 @@ if (!isset($_SESSION['admin_id'])) {
         </div>
     <?php endif; ?>
 
-    <div class="container">
+    <div class="container" style="margin-top: 100px;">
 
         <div class="row">
 
-            <div class="col-md-12">
+            <div class="col-md-12 border border-secondary my-2" >
                 <a href="export.php?what=members" class="btn btn-success btn-md mt-3" >Export</a>
 
                 <h2>Members List</h2>
@@ -53,7 +53,8 @@ if (!isset($_SESSION['admin_id'])) {
                         $sql = "SELECT members.*, 
                training_plans.name AS training_plan_name, 
                trainers.first_name AS trainer_first_name,
-               trainers.last_name AS trainer_last_name
+               trainers.last_name AS trainer_last_name,
+               trainers.photo_path AS trainer_photo_path
                
                FROM members 
                LEFT JOIN training_plans ON members.training_plan_id = training_plans.plan_id
@@ -75,9 +76,21 @@ if (!isset($_SESSION['admin_id'])) {
                                         } else {
                                             echo "Nema trenera";
                                         }
-                                        ?></td>
-                                            <td> <img width="60" src="<?php echo $result['photo_path']; ?>"></td>
-                                <td> <?php
+                                        ?>
+                                        </td>
+
+                                        <td> <?php if($result['photo_path']) {?>
+
+                                        <img width="60" src="<?php echo $result['photo_path']; ?>">  
+
+
+                                        <?php } else {
+                                        echo " <img width ='60' src='member_photos/gym.jpg'>";
+                                        }
+                                        ?>
+                                    </td>
+                                    <td> 
+                                        <?php
                                         if ($result['training_plan_name']) {
                                             echo $result['training_plan_name'];
                                         } else {
@@ -97,7 +110,7 @@ if (!isset($_SESSION['admin_id'])) {
 
                             </form>
 
-</td>
+                              </td>
                                 <td>
 
                                     <form action="delete-member.php" method="POST">
@@ -126,8 +139,8 @@ if (!isset($_SESSION['admin_id'])) {
             </div>
 
         </div>
-        <div class="row">
-            <div class="col-md-12">
+        <div class="row ">
+            <div class="col-md-12 border border-secondary">
                 <h2>Trainers List</h2>
                 <table class="table table-striped">
                     <thead>
@@ -136,6 +149,7 @@ if (!isset($_SESSION['admin_id'])) {
                             <th>Last Name</th>
                             <th>Email</th>
                             <th>Phone Number</th>
+                            <th>Photo</th>
                             <th>Created_at</th>
 
 
@@ -153,6 +167,16 @@ if (!isset($_SESSION['admin_id'])) {
                                 <td> <?php echo $result['last_name']; ?></td>
                                 <td> <?php echo $result['email']; ?></td>
                                 <td> <?php echo $result['phone_number']; ?></td>
+                                <td> <?php if($result['photo_path']) {?>
+
+                                    <img width="60" src="<?php echo $result['photo_path']; ?>">  
+                                
+                                
+                                <?php } else {
+                                    echo " <img width ='60' src='member_photos/gym.jpg'>";
+                                 }
+                                 ?>
+                                 </td>
                                 <td> <?php echo $result['created_at']; ?></td>
                                 <td>
 
@@ -195,8 +219,8 @@ if (!isset($_SESSION['admin_id'])) {
 
 
 
-        <div class="row mb-5">
-            <div class="col-md-6">
+        <div class="row mb-5 ">
+            <div class="col-md-6 border border-secondary my-2">
                 <h2>Register Member</h2>
                 <form action="register_member.php" method='post' enctype='multipart/form-data'>
                     first name: <input required type="text" class='form-control' name='first_name'><br>
@@ -204,8 +228,8 @@ if (!isset($_SESSION['admin_id'])) {
                     email name: <input type="text" class='form-control' name='email'><br>
                     phone number: <input type="number" class='form-control' name='phone_number'><br>
                     tranining plan :
-                    <select name="traninig_plan_id" class='form-control'>
-                        <option disabled selected>click to see traning plans</option>
+                    <select required name="training_plan_id" class='form-select'>
+                        <!-- <option disabled selected>click to see traning plans</option> -->
 
                         <?php
                         $sql = "SELECT * FROM training_plans";
@@ -221,6 +245,7 @@ if (!isset($_SESSION['admin_id'])) {
 
 
                     </select><br>
+
                     <input type="hidden" name='photo_path' id='photoPathInput'>
                     <div id='dropzone-upload' class='dropzone'></div>
 
@@ -228,19 +253,21 @@ if (!isset($_SESSION['admin_id'])) {
                 </form>
 
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 border border-secondary my-2 ">
                 <h2>Register Trainer</h2>
                 <form action="register_trainer.php" method='POST'>
                     first name: <input required type="text" class='form-control' name='first_name'><br>
                     last name: <input required type="text" class='form-control' name='last_name'><br>
                     email name: <input type="text" class='form-control' name='email'><br>
                     phone number: <input type="number" class='form-control' name='phone_number'><br>
-                    <input class="btn btn-primary" type="submit" value="Register Trainer">
+                    <input type="hidden" name='photo_path' id='photoPathInput'>
+                    <div id='dropzone-upload' class='dropzone'></div>
+                    <input class="btn btn-primary mt-3" type="submit" value="Register Trainer">
 
              </form>
             </div>
         </div>
-        <div class="row mb-5">
+        <div class="row mb-5 border border-secondary">
             <h2>Assign Trainer to Member</h2>
             
             <div class="col-md-8">
@@ -276,8 +303,36 @@ if (!isset($_SESSION['admin_id'])) {
             </form>
             </div>
 
+            <div class="row mb-5 border border-secondary p-2">
+            <h2>Update/Add training plan</h2>
+            <div class="col-md-12">
+            tranining plan :
+            <form action="training-plan-update.php" method="POST">
 
-    </div>
+
+           
+                    <select required name="training_plan_id" class='form-select'>
+                        <!-- <option disabled selected>click to see traning plans</option> -->
+
+                        <?php
+                        $sql = "SELECT * FROM training_plans";
+                        $run = $conn->query($sql);
+                        $results = $run->fetch_all(MYSQLI_ASSOC);
+
+                        foreach ($results as $result) {
+                            echo "<option value='" . $result['plan_id'] . "' >" . $result['name'] . "</option>";
+                        }
+
+
+                        ?>
+                      
+
+                    </select>
+                    <button class="btn btn-primary mt-2">Training plan update</button>
+                    </form>
+                </div>
+                </div>
+                </div>
 
 
 

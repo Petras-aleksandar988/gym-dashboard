@@ -9,7 +9,7 @@
      $email = $_POST['email'];
      $phone_number = $_POST['phone_number'];
      $photo_path = $_POST['photo_path'];
-     $training_plan_id = $_POST['traninig_plan_id'];
+     $training_plan_id = $_POST['training_plan_id'];
      $trainer_id =0;
      $access_card_pdf_path = "";
  }
@@ -40,9 +40,9 @@
       $conn->query($sql);
       $conn->close();
 
-       $_SESSION['success_message'] = "Clan teraetane uspjesno dodat";
+       $_SESSION['success_message'] = "New Member <b>"  . $first_name . ' '. $last_name  . "</b> added successfully!";
 
-       header("location:admin_dashboard.php");
+       header("location:admin-dashboard-members.php");
        exit();
 ?>
 

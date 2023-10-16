@@ -8,16 +8,17 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $last_name = $_POST['last_name'];
     $email = $_POST['email'];
     $phone_number = $_POST['phone_number'];
+    $photo_path = $_POST['photo_path'];
      
 
-    $sql = "INSERT INTO trainers (first_name,last_name,email,phone_number)
-    VALUES (?,?,?,?)";
+    $sql = "INSERT INTO trainers (first_name,last_name,email,phone_number,photo_path)
+    VALUES (?,?,?,?,?)";
     $run= $conn->prepare($sql);
-    $run->bind_param("sssi", $first_name, $last_name,$email,$phone_number);
+    $run->bind_param("sssis", $first_name, $last_name,$email,$phone_number, $photo_path);
     $run->execute();
 
-    $_SESSION["success_message"] = "Trener uspjesno dodat";
-    header("location: admin_dashboard.php");
+    $_SESSION["success_message"] = "New Trainer <b>"  . $first_name . ' '. $last_name  . "</b> added successfully!";
+    header("location: admin-dashboard-trainers.php");
     exit();
     
     }

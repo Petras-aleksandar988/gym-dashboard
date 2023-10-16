@@ -21,9 +21,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
             $_SESSION['admin_id'] = $admin['admin_id'];
             $conn->close();
-            header('location: admin_dashboard.php');
+            header('location: admin.php');
         } else {
-            $_SESSION['error'] = "netacan password";
+            $_SESSION['error'] = "incorect password";
             header('location: index.php');
             exit;
         }
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 
 
-        $_SESSION['error'] = "admin ne postoji";
+        $_SESSION['error'] = "admin does not exist";
         header('location: index.php');
         exit;
     }
@@ -51,22 +51,29 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 <body>
 
-    <?php
+   
 
-    if (isset($_SESSION['error'])) {
+<div class="d-flex justify-content-center" style="margin: 100px; width: 100%;">
+    <form action="" method="post" class="w-50">
 
-        echo $_SESSION['error'] . "<br>";
-        unset($_SESSION['error']);
-    }
+    Username: <input type="text" name="username" class="form-control w-100"><br><br>
+    Password: <input type="text" name="password"  class="form-control"><br>
+    <div class="error-message" style="display: block; color: red;"> <?php
 
-    ?>
-    <form action="" method="post">
+if (isset($_SESSION['error'])) {
 
-        Username: <input type="text" name="username"><br><br>
-        Password: <input type="text" name="password"><br>
-        <input type="submit" value="login">
+    echo $_SESSION['error'] . "<br>";
+    unset($_SESSION['error']);
+}
 
-    </form>
+?></div>
+   
+    <input type="submit" value="login" class="btn btn-primary ">
+   
+
+</form>
+</div>
+
 </body>
 
 </html>

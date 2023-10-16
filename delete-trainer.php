@@ -11,12 +11,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   $run->bind_param('i', $trainer_id);
   if($run->execute()){
   
-     $message = "Trener je obrisan";
+     $message = "Trainer is deleted";
   }else{
-      $message = "Trener nije obrisan";
+      $message = "Trainer is not deleted";
   }
    $_SESSION['success_message'] = $message;
-   header('location:admin_dashboard.php');
+   header('location:admin-dashboard-trainers.php');
    exit();
 
 }

@@ -26,8 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
      $member_first = $results['first_name'];
      $member_last = $results['last_name'];
 
-     $_SESSION['success_message'] = 'Trener '.'<b>' . $trainer_first . ' ' . $trainer_last . '</b>' .' uspješno dodijeljen članu ' .'<b>' . $member_first . ' ' . $member_last . '</b>';
-     header("location: admin_dashboard.php");
+     $_SESSION['success_message'] = 'Trainer '.'<b>' . $trainer_first . ' ' . $trainer_last . '</b>' .' successfully added to member ' .'<b>' . $member_first . ' ' . $member_last . '</b>';
+     header("location: admin-dashboard-members.php");
      exit();
 
 }
