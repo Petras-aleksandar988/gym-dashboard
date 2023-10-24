@@ -1,7 +1,7 @@
 <?php
 
 require_once "config.php";
-
+require_once "session_check.php"; 
 
 if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['add_training_plan'])) {
     
@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['add_training_plan'])) 
         $run -> bind_param("sss", $newPlan,$newSessions ,$price);
         $run-> execute();
         $_SESSION["success_message"] = "Training plan is ADDED";
-        header("location: admin-dashboard-training_plan.php");
+        echo '<script type="text/javascript">window.location = "admin-dashboard-training_plan.php"</script>';
        exit();
     }
 
@@ -28,10 +28,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['add_training_plan'])) 
 
 
 
-<div class="container" style="margin-top: 100px;">
+<div class="container" style="margin-top: 90px;">
 
     <div class="row">
-        <div class="col-md-12 border border-secundary m-2 p-2">
+        <div class="col-md-12 border border-secundary p-2">
         <h2>ADD New Training Plan</h2>
         <form  method='POST' >
                     training plan name: <input required type="text" class='form-control' name='training_plan_name'><br>

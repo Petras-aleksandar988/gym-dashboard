@@ -2,6 +2,7 @@
 require_once "config.php";
 
 
+
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -21,10 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
             $_SESSION['admin_id'] = $admin['admin_id'];
             $conn->close();
-            header('location: admin.php');
+            echo '<script type="text/javascript">window.location = "admin.php"</script>';
         } else {
             $_SESSION['error'] = "incorect password";
-            header('location: index.php');
+            echo '<script type="text/javascript">window.location = "index.php"</script>';
             exit;
         }
     } else {
@@ -32,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 
         $_SESSION['error'] = "admin does not exist";
-        header('location: index.php');
+        echo '<script type="text/javascript">window.location = "index.php"</script>';
         exit;
     }
 }

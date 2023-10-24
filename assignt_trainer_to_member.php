@@ -1,3 +1,9 @@
+<?php
+require_once "session_check.php";
+
+?>
+
+  
 <div class="row mb-5 border border-secondary p-3">
             <h2>Assign Trainer to Member</h2>
             

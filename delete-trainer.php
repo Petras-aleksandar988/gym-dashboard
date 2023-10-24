@@ -1,6 +1,6 @@
 <?php
 require_once "config.php";
-
+require_once "session_check.php";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
   
@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
       $message = "Trainer is not deleted";
   }
    $_SESSION['success_message'] = $message;
-   header('location:admin-dashboard-trainers.php');
+   echo '<script type="text/javascript">window.location = "admin-dashboard-trainers.php"</script>';
    exit();
 
 }

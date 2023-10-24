@@ -1,5 +1,6 @@
 <?php
 require_once "config.php";
+require_once "session_check.php";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['trainer_id'])) {
     // The POST request contains 'trainer_id', so fetch trainer information
@@ -38,7 +39,7 @@ $assign_trianer = $conn->prepare( $updateSql);
 $assign_trianer->bind_param("ssssss", $newFirstName, $newLastName,  $newEmail, $newPhoneNumber, $photo,  $trainer_id);
 $assign_trianer->execute();
 $_SESSION["success_message"] = "Info about trainer <b>" .  $newFirstName . " " . $newLastName .  "</b> is updated";
-    header("location: admin-dashboard-trainers.php");
+echo '<script type="text/javascript">window.location = "admin-dashboard-trainers.php"</script>';
     exit();
 }
 }
@@ -105,7 +106,7 @@ $_SESSION["success_message"] = "Info about trainer <b>" .  $newFirstName . " " .
             <input type="hidden" name="trainer_id" value="<?php echo $trainer_id ; ?>">
             <div class="alert alert-danger alert-dismissible fade show d-inline-flex p-2  mt-1" role="alert">
 
-                <td>  <img width="220" src="<?php echo  $result['photo_path'] ?>" > </td>
+                <td>  <img width="160" height="160" src="<?php echo  $result['photo_path'] ?>" > </td>
     
             </div>
             <button type="submit" class="btn-close position-absolute"></button>

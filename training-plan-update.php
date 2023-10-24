@@ -1,6 +1,7 @@
 <?php
 
 require_once "config.php";
+require_once "session_check.php";
 
 
 if (isset($_POST['update_training_plan'])) {
@@ -41,7 +42,7 @@ $update_training_plan = $conn->prepare( $updateSql);
 $update_training_plan->bind_param("siii", $newPlanName,  $newsessionsNumber,  $newPrice, $training_plan_id);
 $update_training_plan->execute();
 $_SESSION["success_message"] = "Training plan is updated";
-header("location: admin-dashboard-training_plan.php");
+echo '<script type="text/javascript">window.location = "admin-dashboard-training_plan.php"</script>';
 exit();
 }
 if (isset($_POST['delete_plan'])) {
@@ -56,13 +57,13 @@ if (isset($_POST['delete_plan'])) {
         $message = "Training plan is not deleted";
     }
      $_SESSION['success_message'] = $message;
-     header('location:admin-dashboard-training_plan.php');
+     echo '<script type="text/javascript">window.location = "admin-dashboard-training_plan.php"</script>';
      exit();
 
 }
 ?>
 
-<div class="container" style="margin-top: 100px;">
+<div class="container" style="margin-top: 80px;">
     <div class="row">
         <div class="col-md-12 border border-secundary m-2 p-2">
             <h2>Update Training Plan</h2>

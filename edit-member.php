@@ -1,5 +1,6 @@
 <?php
 require_once "config.php";
+require_once "session_check.php";
 
 // Initialize the $result variable
 if (isset($_POST['member_id'])) {
@@ -23,6 +24,7 @@ WHERE members.member_id = ?";
 
         $result = $stmt->get_result()->fetch_assoc();
         $photoPath = $result['photo_path'];
+        echo $photoPath;
     } else {
         die("Error: " . $conn->error);
     }
@@ -51,7 +53,7 @@ $assign_trianer = $conn->prepare( $updateSql);
 $assign_trianer->bind_param("ssssiss", $newFirstName, $newLastName,  $newEmail, $newPhoneNumber,   $newTraninigPlan,$photo , $member_id);
 $assign_trianer->execute();
 $_SESSION["success_message"] = "Info about member <b>" .  $newFirstName . " " . $newLastName .  "</b> is changed";
-header("location: admin-dashboard-members.php");
+echo '<script type="text/javascript">window.location = "admin-dashboard-members.php"</script>';
 exit();
        
     }
@@ -130,6 +132,9 @@ exit();
                                    </td>
 
                     <td><?php echo $result['created_at']; ?></td>
+
+
+
                  <td> <input type="hidden" name="member_id" value="<?php echo $member_id; ?>"> </td>
                  <td>  <input type="hidden" name='photo' id='photoPathInput' value="<?php echo $photoPath; ?>"> </td>
                 
@@ -141,6 +146,8 @@ exit();
                 </table>
                  <label for=>Upload Photo</label>
                     <div id='dropzone-upload' class='dropzone'></div>
+
+
                 <button type="submit" name="update_member" class="btn btn-primary mt-1">Save Changes</button>
             </form>
                 <?php if ( $result['photo_path']): ?>
@@ -148,7 +155,7 @@ exit();
             <input type="hidden" name="member_id" value="<?php echo $member_id; ?>">
             <div class="alert alert-danger alert-dismissible fade show d-inline-flex p-2  mt-1" role="alert">
 
-                <td>  <img width="220" src="<?php echo  $result['photo_path'] ?>" > </td>
+                <td>  <img width="160"  height="160" src="<?php echo  $result['photo_path'] ?>" > </td>
     
             </div>
 <button type="submit" class="btn-close position-absolute"></button>

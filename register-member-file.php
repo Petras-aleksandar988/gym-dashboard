@@ -1,3 +1,8 @@
+<?php
+require_once "session_check.php";
+
+?>
+
 <div class="col-md-6 border border-secondary p-5 m-auto ">
                 <h2>Register Member</h2>
                 <form action="register_member.php" method='post' enctype='multipart/form-data'>

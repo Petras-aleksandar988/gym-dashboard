@@ -1,5 +1,6 @@
 <?php
 require_once "config.php";
+require_once "session_check.php";
 
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -18,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $run->execute();
 
     $_SESSION["success_message"] = "New Trainer <b>"  . $first_name . ' '. $last_name  . "</b> added successfully!";
-    header("location: admin-dashboard-trainers.php");
+    echo '<script type="text/javascript">window.location = "admin-dashboard-trainers.php"</script>';
     exit();
     
     }

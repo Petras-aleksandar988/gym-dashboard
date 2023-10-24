@@ -1,3 +1,8 @@
+<?php
+require_once "session_check.php";
+
+?>
+
 <div class="col-md-5 border border-secondary  p-5 m-auto ">
                 <h2>Register Trainer</h2>
                 <form action="register_trainer.php" method='POST'>

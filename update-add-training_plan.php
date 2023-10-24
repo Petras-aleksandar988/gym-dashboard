@@ -1,5 +1,10 @@
+<?php
+require_once "session_check.php";
+
+?>
+
 <div class="row mb-5 border border-secondary p-3">
-            <h2>Update existing training plan</h2>
+            <h2>Update/Delete existing training plan</h2>
             <div class="col-md-12">
            choose tranining plan you want to update :
             <form action="training-plan-update.php" method="POST">
@@ -23,7 +28,7 @@
                       
 
                     </select>
-                    <button class="btn btn-primary mt-2" name="update_training_plan">Training plan update</button>
+                    <button class="btn btn-primary mt-2" name="update_training_plan">Training plan update/delete</button>
                     </form>
                 </div>
                 </div>

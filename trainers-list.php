@@ -1,3 +1,8 @@
+<?php
+require_once "session_check.php";
+
+?>
+
 <div class="row ">
             <div class="col-md-12 border border-secondary">
                 <h2>Trainers List</h2>
@@ -28,11 +33,11 @@
                                 <td> <?php echo $result['phone_number']; ?></td>
                                 <td> <?php if($result['photo_path']) {?>
 
-                                    <img width="60" src="<?php echo $result['photo_path']; ?>">  
+                                    <img width="60" height='60' src="<?php echo $result['photo_path']; ?>">  
                                 
                                 
                                 <?php } else {
-                                    echo " <img width ='60' src='member_photos/gym.jpg'>";
+                                    echo " <img width ='60' height='60' src='member_photos/gym.jpg'>";
                                  }
                                  ?>
                                  </td>

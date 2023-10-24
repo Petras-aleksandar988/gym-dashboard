@@ -1,6 +1,8 @@
 <?php
 require_once "config.php";
 
+require_once "session_check.php";
+
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
   
@@ -27,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
      $member_last = $results['last_name'];
 
      $_SESSION['success_message'] = 'Trainer '.'<b>' . $trainer_first . ' ' . $trainer_last . '</b>' .' successfully added to member ' .'<b>' . $member_first . ' ' . $member_last . '</b>';
-     header("location: admin-dashboard-members.php");
+     echo '<script type="text/javascript">window.location = "admin-dashboard-members.php"</script>';
      exit();
 
 }

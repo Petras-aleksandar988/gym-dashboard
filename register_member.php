@@ -1,6 +1,8 @@
 <?php  
  require_once "config.php";
  require_once "fpdf/fpdf.php";
+require_once "session_check.php";
+
 
  if ($_SERVER['REQUEST_METHOD'] == "POST"){
      $first_name = $_POST['first_name'];
@@ -42,7 +44,7 @@
 
        $_SESSION['success_message'] = "New Member <b>"  . $first_name . ' '. $last_name  . "</b> added successfully!";
 
-       header("location:admin-dashboard-members.php");
+       echo '<script type="text/javascript">window.location = "admin-dashboard-members.php"</script>';
        exit();
 ?>
 

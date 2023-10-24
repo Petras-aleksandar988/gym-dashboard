@@ -1,6 +1,10 @@
+<?php
+require_once "session_check.php";
+
+?>
 <div class="row">
 
-<div class="col-md-12 border border-secondary my-2" >
+<div class="col-md-12 border border-secondary" >
     <a href="export.php?what=members" class="btn btn-success btn-md mt-3" >Export</a>
 
     <h2>Members List</h2>
@@ -41,14 +45,19 @@
                     <td> <?php echo $result['last_name']; ?></td>
                     <td> <?php echo $result['email']; ?></td>
                     <td> <?php echo $result['phone_number']; ?></td>
-                    <td> <?php
+                    <td>
+                        <?php if ( $result['trainer_first_name'] == "no trainer" ||$result['trainer_id'] == 0 ) { ?>
+                        <img width="60" height="60" src="member_photos/no_trainer.jpg" alt="">
 
-                            if ($result['trainer_first_name']) {
-                                echo $result['trainer_first_name'] . " " . $result['trainer_last_name'];
+                        <?php
                             } else {
-                                ?>
-                               <img width="60" src="member_photos/no_trainer.jpg" alt="">
-                          <?php   } ?>
+                                echo $result['trainer_first_name'] . " " . $result['trainer_last_name']; 
+                             } ?>
+                               
+                           
+
+
+
                             </td>
 
                             <td> <?php if($result['photo_path']) {?>
@@ -57,7 +66,7 @@
 
 
                             <?php } else {
-                            echo " <img width ='60' src='member_photos/gym.jpg'>";
+                            echo " <img width ='60' height='60' src='member_photos/gym.jpg'>";
                             }
                             ?>
                         </td>
@@ -65,7 +74,7 @@
                             <?php
                             if ($result['training_plan_name'] == "no plan") {
                                 ?>
-                                 <img width="60" src="member_photos/no_plan.png" alt="">
+                                 <img width="60" height="60" src="member_photos/no_plan.png" alt="">
                                  <?php
                             } else {
                               echo $result['training_plan_name'];

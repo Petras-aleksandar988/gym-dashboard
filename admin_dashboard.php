@@ -1,28 +1,12 @@
 <?php
 
 require_once "config.php";
-
-if (!isset($_SESSION['admin_id'])) {
-    header('location: index.php');
-    die();
-}
-
+require_once "session_check.php"; 
 
 ?>
 
-<body>
 
-    <?php if (isset($_SESSION['success_message'])) : ?>
-
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-
-            <?php echo $_SESSION['success_message'];
-            unset($_SESSION['success_message']);
-            ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-
-        </div>
-    <?php endif; ?>
+   
 
     <div class="container" style="margin-top: 100px;">
 
