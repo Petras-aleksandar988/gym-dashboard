@@ -8,7 +8,7 @@ require_once "session_check.php";
 
 // if ($_SERVER['REQUEST_METHOD'] == "POST") {
   $member_id =  $_POST['member_id'];
-  echo $member_id;
+
   $sql  ="UPDATE members
   SET photo_path = '' -- or '' (empty string)
   WHERE member_id = ?";

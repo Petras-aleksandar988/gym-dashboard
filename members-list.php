@@ -19,7 +19,7 @@ require_once "session_check.php";
                 <th>Photo</th>
                 <th>Training Plan</th>
                 <th>Accrss Card</th>
-                <th>Created At</th>
+                <th>Member since</th>
 
 
             </tr>
@@ -34,7 +34,7 @@ require_once "session_check.php";
    
    FROM members 
    LEFT JOIN training_plans ON members.training_plan_id = training_plans.plan_id
-   LEFT JOIN trainers ON members.trainer_id = trainers.trainer_id;";
+   LEFT JOIN trainers ON members.trainer_id = trainers.trainer_id ORDER BY created_at DESC";
             $run = $conn->query($sql);
             $results = $run->fetch_all(MYSQLI_ASSOC);
             $select_members = $results;

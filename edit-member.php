@@ -1,5 +1,6 @@
 <?php
 require_once "config.php";
+require_once "fpdf/fpdf.php";
 require_once "session_check.php";
 
 // Initialize the $result variable
@@ -52,6 +53,41 @@ WHERE members.member_id = ?";
 $assign_trianer = $conn->prepare( $updateSql);
 $assign_trianer->bind_param("ssssiss", $newFirstName, $newLastName,  $newEmail, $newPhoneNumber,   $newTraninigPlan,$photo , $member_id);
 $assign_trianer->execute();
+
+$select_training_plan = "SELECT * from training_plans where plan_id =$newTraninigPlan";
+ $trainig_plan = $conn->query($select_training_plan);
+ $results_trining_plan = $trainig_plan->fetch_object();
+
+$pdf = new FPDF();
+       $pdf->AddPage();
+       $pdf->SetFont('Arial', "B", 16);
+       $pdf->Ln();
+       $pdf->Cell(40,10, 'Member ID: ' . $member_id);
+       $pdf->Ln();
+       $pdf->Cell(40,10, 'Name: ' . $newFirstName . " " . $newLastName);
+       $pdf->Ln();
+       $pdf->Cell(40,10, 'Email: ' . $newEmail);
+       $pdf->Ln();
+       $pdf->Cell(40,10, 'Phone number : ' . $newPhoneNumber);
+       $pdf->Ln();
+       $pdf->Cell(40,10, 'training plan name: ' . $results_trining_plan->name);
+       $pdf->Ln();
+       $pdf->Cell(40,10, 'number of training per week: ' . $results_trining_plan->sessions);
+       $pdf->Ln();
+       $pdf->Cell(40,10, 'Price per month: ' . $results_trining_plan->price . " $");
+       
+       $filename = "access_cards/access_card_" . $member_id . ".pdf";
+       $pdf-> Output('F', $filename);
+      $sql = "UPDATE members SET access_card_pdf_path = '$filename'  WHERE member_id = $member_id";
+      $conn->query($sql);
+      $conn->close();
+
+
+
+
+
+
+
 $_SESSION["success_message"] = "Info about member <b>" .  $newFirstName . " " . $newLastName .  "</b> is changed";
 echo '<script type="text/javascript">window.location = "admin-dashboard-members.php"</script>';
 exit();

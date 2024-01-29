@@ -14,13 +14,13 @@ require_once "session_check.php";
                             <th>Email</th>
                             <th>Phone Number</th>
                             <th>Photo</th>
-                            <th>Created_at</th>
+                            <th>Active since</th>
 
 
                         </tr>
                     <tbody>
                         <?php
-                        $sql = "SELECT * FROM trainers";
+                        $sql = "SELECT * FROM trainers ORDER BY created_at DESC";
                         $run = $conn->query($sql);
                         $results = $run->fetch_all(MYSQLI_ASSOC);
                         $select_trainers = $results;

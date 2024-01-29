@@ -52,10 +52,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 <body>
 
-   
+  <h3  style="text-align: center;margin-top: 10px;">Admin Panel</h3>
+<div class="container my-5 mx-auto">
 
-<div class="d-flex justify-content-center" style="margin: 100px; width: 100%;">
-    <form action="" method="post" class="w-50">
+
+<div class=" row border justify-content-center  ">
+    <div class="col-lg-12 m-3">
+    <form action="" method="post" >
 
     Username: <input type="text" name="username" class="form-control w-100"><br><br>
     Password: <input type="text" name="password"  class="form-control"><br>
@@ -73,6 +76,8 @@ if (isset($_SESSION['error'])) {
    
 
 </form>
+</div>
+</div>
 </div>
 
 </body>

@@ -17,6 +17,10 @@ require_once "session_check.php";
  }
 
 
+ $select_training_plan = "SELECT * from training_plans where plan_id = $training_plan_id";
+ $trainig_plan = $conn->query($select_training_plan);
+ $results_trining_plan = $trainig_plan->fetch_object();
+
  $sql = "INSERT INTO members
         (first_name, last_name, email, phone_number, photo_path,trainer_id, training_plan_id, access_card_pdf_path)
             VALUES (?,?,?,?,?,?,?,?)";
@@ -29,12 +33,19 @@ require_once "session_check.php";
        $pdf->AddPage();
        $pdf->SetFont('Arial', "B", 16);
        $pdf->Ln();
-       $pdf->Cell(40,10, 'Memmber ID:' . $member_id);
+       $pdf->Cell(40,10, 'Member ID: ' . $member_id);
        $pdf->Ln();
-       $pdf->Cell(40,10, 'Name:' . $first_name . "" . $last_name);
+       $pdf->Cell(40,10, 'Name: ' . $first_name . " " . $last_name);
        $pdf->Ln();
-       $pdf->Cell(40,10, 'Email:' . $email);
+       $pdf->Cell(40,10, 'Email: ' . $email);
        $pdf->Ln();
+       $pdf->Cell(40,10, 'Phone number : ' . $phone_number);
+       $pdf->Ln();
+       $pdf->Cell(40,10, 'training plan name: ' . $results_trining_plan->name);
+       $pdf->Ln();
+       $pdf->Cell(40,10, 'number of training per week: ' . $results_trining_plan->sessions);
+       $pdf->Ln();
+       $pdf->Cell(40,10, 'Price per month: ' . $results_trining_plan->price . " $");
        
        $filename = "access_cards/access_card_" . $member_id . ".pdf";
        $pdf-> Output('F', $filename);

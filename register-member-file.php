@@ -6,8 +6,13 @@ require_once "session_check.php";
 <div class="col-md-6 border border-secondary p-5 m-auto ">
                 <h2>Register Member</h2>
                 <form action="register_member.php" method='post' enctype='multipart/form-data'>
-                    first name: <input required type="text" class='form-control' name='first_name'><br>
-                    last name: <input required type="text" class='form-control' name='last_name'><br>
+                    <div class="form-group mb-3">
+
+                        <label for="first_name">First Name</label>
+                         <input required type="text" class='form-control' name='first_name'><br>
+
+                    </div>
+                    <input required type="text" class='form-control' name='last_name'><br>
                     email name: <input type="text" class='form-control' name='email'><br>
                     phone number: <input type="number" class='form-control' name='phone_number'><br>
                     tranining plan :
