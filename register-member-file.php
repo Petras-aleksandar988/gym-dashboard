@@ -13,7 +13,7 @@ require_once "session_check.php";
 
                     </div>
                     <input required type="text" class='form-control' name='last_name'><br>
-                    email name: <input type="text" class='form-control' name='email'><br>
+                    email name: <input type="email" class='form-control' name='email'><br>
                     phone number: <input type="number" class='form-control' name='phone_number'><br>
                     tranining plan :
                     <select required name="training_plan_id" class='form-select'>

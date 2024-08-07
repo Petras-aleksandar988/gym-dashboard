@@ -8,7 +8,7 @@ require_once "session_check.php";
                 <form action="register_trainer.php" method='POST'>
                     first name: <input required type="text" class='form-control' name='first_name'><br>
                     last name: <input required type="text" class='form-control' name='last_name'><br>
-                    email name: <input type="text" class='form-control' name='email'><br>
+                    email name: <input type="email" class='form-control' name='email'><br>
                     phone number: <input type="number" class='form-control' name='phone_number'><br>
                     <input type="hidden" name='photo_path' id='photoPathInput'>
                     <div id='dropzone-upload' class='dropzone'></div>
