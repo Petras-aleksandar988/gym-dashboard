@@ -1,5 +1,7 @@
 <?php
 require_once "config.php";
+require_once "header.php";
+
 require_once "session_check.php";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['trainer_id'])) {

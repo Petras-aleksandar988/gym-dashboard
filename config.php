@@ -13,7 +13,6 @@ if(!$conn){
 }
 
 
-require_once "header.php";
 
 ?>
 

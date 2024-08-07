@@ -5,6 +5,7 @@ require_once "session_check.php";
 
 <div class="row ">
             <div class="col-md-12 border border-secondary">
+            <a href="export.php?what=trainers" class="btn btn-success btn-md mt-3" >Export</a>
                 <h2>Trainers List</h2>
                 <table class="table table-striped">
                     <thead>
